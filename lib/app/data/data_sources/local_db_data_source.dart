@@ -67,7 +67,7 @@ class LocalDbDataSource {
       $_todoId TEXT NOT NULL PRIMARY KEY,
       $_todoTitle TEXT,
       $_todoDescription TEXT,
-      $_todoIsChecked TEXT
+      $_todoIsChecked INTEGER
     );
   """;
 

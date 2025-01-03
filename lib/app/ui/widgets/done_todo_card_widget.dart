@@ -5,7 +5,9 @@ import 'custom_check_box_widget.dart';
 
 class DoneTodoCardWidget extends StatelessWidget {
   final TodoModel todo;
-  const DoneTodoCardWidget({super.key, required this.todo});
+  final VoidCallback? onToggle;
+  final VoidCallback? onDelete;
+  const DoneTodoCardWidget({super.key, required this.todo, this.onToggle, this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +23,9 @@ class DoneTodoCardWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CustomCheckBoxWidget(
-              isChecked: true,
+             CustomCheckBoxWidget(
+              isChecked: todo.isChecked,
+              onTap: onToggle,
             ),
             const SizedBox(
               width: 10,
@@ -41,9 +44,12 @@ class DoneTodoCardWidget extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(
-              Icons.delete,
-              color: Colors.red,
+            InkWell(
+              onTap: onDelete,
+              child: const Icon(
+                Icons.delete,
+                color: Colors.red,
+              ),
             ),
           ],
         ),

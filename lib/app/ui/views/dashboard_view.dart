@@ -16,6 +16,7 @@ class _DashboardViewState extends State<DashboardView> {
   @override
   void initState() {
     super.initState();
+    viewModel.initState();
     viewModel.addListener(() {
       setState(() {});
     });
@@ -29,45 +30,49 @@ class _DashboardViewState extends State<DashboardView> {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        selectedFontSize: 12,
-        unselectedFontSize: 12,
-        currentIndex: viewModel.currentIndex,
-        onTap: (value) {
-          if (value == 1) {
-            // create
-            showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (context) {
-                return const CreateTodoBottomWidget();
-              },
-            );
-          } else {
-            viewModel.changeIndex(value);
-          }
+      bottomNavigationBar: ListenableBuilder(
+        listenable: viewModel,
+        builder: (context, child) {
+          return BottomNavigationBar(
+            selectedFontSize: 12,
+            unselectedFontSize: 12,
+            currentIndex: viewModel.currentIndex,
+            onTap: (value) async {
+              if (value == 1) {
+                // create
+                await showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  builder: (context) {
+                    return const CreateTodoBottomWidget();
+                  },
+                );
+                viewModel.newTasksNotifier.notify();
+              } else {
+                viewModel.changeIndex(value);
+              }
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list),
+                label: 'Todo',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.add_box_outlined),
+                label: 'Create',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+                label: 'Search',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.check_box_outlined),
+                label: 'Done',
+              ),
+            ],
+          );
         },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Todo',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add_box_outlined),
-            label: 'Create',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.check_box_outlined),
-            label: 'Done',
-          ),
-        ],
       ),
       body: SafeArea(
         child: Padding(
@@ -80,7 +85,12 @@ class _DashboardViewState extends State<DashboardView> {
                 height: 20,
               ),
               Expanded(
-                child: viewModel.views[viewModel.currentIndex],
+                child: ListenableBuilder(
+                  listenable: viewModel,
+                  builder: (context, child) {
+                    return viewModel.views[viewModel.currentIndex];
+                  },
+                ),
               ),
             ],
           ),

@@ -38,14 +38,17 @@ class _SearchViewState extends State<SearchView> {
       children: [
         TextField(
           decoration: InputDecoration(
-              filled: true,
-              fillColor: colorScheme.onSurfaceVariant,
-              border: const OutlineInputBorder(),
-              prefixIcon: const Icon(Icons.search),
-              prefixIconColor: colorScheme.primary,
-              hintText: 'Searching for...'),
+            filled: true,
+            fillColor: colorScheme.onSurfaceVariant,
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+            prefixIcon: const Icon(Icons.search),
+            prefixIconColor: colorScheme.primary,
+            hintText: 'Searching for...',
+          ),
         ),
-        const SizedBox(height: 20,),
+        const SizedBox(
+          height: 20,
+        ),
         Expanded(
           child: viewModel.todos.isNotEmpty
               ? ListView.separated(

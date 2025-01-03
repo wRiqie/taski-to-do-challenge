@@ -2,7 +2,7 @@ class TodoModel {
   final String id;
   final String title;
   final String description;
-  final bool isChecked;
+  bool isChecked;
 
   TodoModel({
     required this.id,

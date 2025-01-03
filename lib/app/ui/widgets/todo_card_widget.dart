@@ -6,11 +6,13 @@ class TodoCardWidget extends StatefulWidget {
   final TodoModel todo;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;
+  final VoidCallback? onToggle;
   const TodoCardWidget({
     super.key,
     required this.todo,
     this.onEdit,
     this.onDelete,
+    this.onToggle,
   });
 
   @override
@@ -41,7 +43,10 @@ class _TodoCardWidgetState extends State<TodoCardWidget> {
                 ? CrossAxisAlignment.start
                 : CrossAxisAlignment.center,
             children: [
-               CustomCheckBoxWidget(isChecked: widget.todo.isChecked),
+              CustomCheckBoxWidget(
+                isChecked: widget.todo.isChecked,
+                onTap: widget.onToggle,
+              ),
               const SizedBox(
                 width: 10,
               ),
@@ -59,7 +64,9 @@ class _TodoCardWidgetState extends State<TodoCardWidget> {
                     Visibility(
                       visible: isExpanded,
                       child: Text(
-                        widget.todo.description,
+                        widget.todo.description.trim().isNotEmpty
+                            ? widget.todo.description
+                            : 'No description',
                         style: TextStyle(
                           color: colorScheme.secondary,
                         ),
@@ -70,28 +77,23 @@ class _TodoCardWidgetState extends State<TodoCardWidget> {
               ),
               Visibility(
                 visible: !isExpanded,
-                child: GestureDetector(
-                  onTap: () {
-                    print('Tap');
-                  },
-                  child: PopupMenuButton<String>(
-                    child: Icon(
-                      Icons.more_horiz,
-                      color: colorScheme.secondary,
-                    ),
-                    itemBuilder: (context) {
-                      return [
-                        PopupMenuItem<String>(
-                          onTap: widget.onEdit,
-                          child: const Text('Edit'),
-                        ),
-                        PopupMenuItem<String>(
-                          onTap: widget.onDelete,
-                          child: const Text('Delete'),
-                        ),
-                      ];
-                    },
+                child: PopupMenuButton<String>(
+                  child: Icon(
+                    Icons.more_horiz,
+                    color: colorScheme.secondary,
                   ),
+                  itemBuilder: (context) {
+                    return [
+                      PopupMenuItem<String>(
+                        onTap: widget.onEdit,
+                        child: const Text('Edit'),
+                      ),
+                      PopupMenuItem<String>(
+                        onTap: widget.onDelete,
+                        child: const Text('Delete'),
+                      ),
+                    ];
+                  },
                 ),
               ),
             ],
