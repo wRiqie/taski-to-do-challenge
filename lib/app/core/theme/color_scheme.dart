@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of 'app_theme.dart';
 
 const colorScheme = ColorScheme(
   brightness: Brightness.light,
@@ -8,6 +8,7 @@ const colorScheme = ColorScheme(
   onSecondary: Color(0xFFFFFFFF),
   error: Colors.red,
   onError: Colors.white,
-  surface: Color(0xFFF5F7F9),
+  surface: Color(0xFFFFFFFF),
   onSurface: Color(0xFF3F3D56),
+  onSurfaceVariant: Color(0xFFF5F7F9),
 );

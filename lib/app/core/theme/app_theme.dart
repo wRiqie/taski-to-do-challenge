@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:taski_to_do_challenge/app/core/theme/color_scheme.dart';
+
+part 'color_scheme.dart';
 
 final appTheme = ThemeData(
   fontFamily: 'Urbanist',

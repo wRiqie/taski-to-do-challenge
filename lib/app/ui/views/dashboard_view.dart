@@ -10,19 +10,19 @@ class DashboardView extends StatefulWidget {
 }
 
 class _DashboardViewState extends State<DashboardView> {
-  final dashboardViewModel = DashboardViewModel();
+  final viewModel = DashboardViewModel();
 
   @override
   void initState() {
     super.initState();
-    dashboardViewModel.addListener(() {
+    viewModel.addListener(() {
       setState(() {});
     });
   }
 
   @override
   void dispose() {
-    dashboardViewModel.dispose();
+    viewModel.dispose();
     super.dispose();
   }
 
@@ -34,9 +34,9 @@ class _DashboardViewState extends State<DashboardView> {
       bottomNavigationBar: BottomNavigationBar(
         selectedFontSize: 12,
         unselectedFontSize: 12,
-        currentIndex: dashboardViewModel.currentIndex,
+        currentIndex: viewModel.currentIndex,
         onTap: (value) {
-          dashboardViewModel.changeIndex(value);
+          viewModel.changeIndex(value);
         },
         items: const [
           BottomNavigationBarItem(
@@ -68,8 +68,7 @@ class _DashboardViewState extends State<DashboardView> {
                 height: 20,
               ),
               Expanded(
-                child:
-                    dashboardViewModel.views[dashboardViewModel.currentIndex],
+                child: viewModel.views[viewModel.currentIndex],
               ),
             ],
           ),
