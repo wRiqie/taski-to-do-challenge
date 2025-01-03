@@ -21,12 +21,10 @@ class DashboardViewModel extends BaseViewModel {
   void initState() {
     super.initState();
     views = [
-      HomeView(
-        newTasksNotifier: newTasksNotifier,
-      ),
+      HomeView(newTasksNotifier: newTasksNotifier),
       Container(),
       const SearchView(),
-      const DoneView(),
+      DoneView(newTasksNotifier: newTasksNotifier),
     ];
   }
 

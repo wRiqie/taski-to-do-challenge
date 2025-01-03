@@ -58,4 +58,13 @@ class DoneViewModel extends BaseViewModel {
 
     loadTodos();
   }
+
+  Future<void> deleteAllUncheckedTodos() async {
+    isLoading = true;
+    notifyListeners();
+
+    await _todoRepository.deleteAllUnchecked();
+
+    loadTodos();
+  }
 }

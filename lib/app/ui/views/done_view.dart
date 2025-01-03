@@ -7,7 +7,8 @@ import 'package:taski_to_do_challenge/app/ui/view_models/done_view_model.dart';
 import 'package:taski_to_do_challenge/app/ui/widgets/done_todo_card_widget.dart';
 
 class DoneView extends StatefulWidget {
-  const DoneView({super.key});
+  final ChangeNotifier newTasksNotifier;
+  const DoneView({super.key, required this.newTasksNotifier});
 
   @override
   State<DoneView> createState() => _DoneViewState();
@@ -20,10 +21,12 @@ class _DoneViewState extends State<DoneView> {
   void initState() {
     super.initState();
     viewModel.initState();
+    widget.newTasksNotifier.addListener(viewModel.loadTodos);
   }
 
   @override
   void dispose() {
+    widget.newTasksNotifier.removeListener(viewModel.loadTodos);
     viewModel.dispose();
     super.dispose();
   }
@@ -46,7 +49,17 @@ class _DoneViewState extends State<DoneView> {
               ),
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                DialogHelper.showDecisionDialog(
+                  context,
+                  title: 'Delete all completed',
+                  content:
+                      'Are you sure you want to delete all completed tasks?',
+                  onConfirm: () {
+                    viewModel.deleteAllUncheckedTodos();
+                  },
+                );
+              },
               style: ButtonStyle(
                 overlayColor: WidgetStatePropertyAll(
                   colorScheme.error.withOpacity(.1),

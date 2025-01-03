@@ -18,7 +18,7 @@ class _CreateTodoBottomWidgetState extends State<CreateTodoBottomWidget>
   @override
   void initState() {
     super.initState();
-    
+
     viewModel.initState();
   }
 
@@ -43,7 +43,17 @@ class _CreateTodoBottomWidgetState extends State<CreateTodoBottomWidget>
           children: [
             Row(
               children: [
-                const CustomCheckBoxWidget(),
+                ListenableBuilder(
+                  listenable: viewModel,
+                  builder: (context, child) {
+                    return CustomCheckBoxWidget(
+                      isChecked: viewModel.isChecked,
+                      onTap: () {
+                        viewModel.toggleIsChecked();
+                      },
+                    );
+                  },
+                ),
                 const SizedBox(
                   width: 18,
                 ),
