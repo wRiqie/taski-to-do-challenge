@@ -55,22 +55,20 @@ class _DoneViewState extends State<DoneView> {
           ],
         ),
         const SizedBox(
-          height: 24,
+          height: 18,
         ),
         Expanded(
           child: viewModel.todos.isNotEmpty
-              ? Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        return DoneTodoCardWidget(todo: viewModel.todos[index]);
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 16,
-                        );
-                      },
-                      itemCount: viewModel.todos.length))
+              ? ListView.separated(
+                  itemBuilder: (context, index) {
+                    return DoneTodoCardWidget(todo: viewModel.todos[index]);
+                  },
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(
+                      height: 16,
+                    );
+                  },
+                  itemCount: viewModel.todos.length)
               : Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,

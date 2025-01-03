@@ -27,7 +27,7 @@ class DoneTodoCardWidget extends StatelessWidget {
             const SizedBox(
               width: 10,
             ),
-            Expanded(
+            Expanded( 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [

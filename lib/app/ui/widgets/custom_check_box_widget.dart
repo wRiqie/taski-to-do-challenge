@@ -8,13 +8,21 @@ class CustomCheckBoxWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      padding: const EdgeInsets.all(12),
+      padding: isChecked ? null : const EdgeInsets.all(12),
       decoration: BoxDecoration(
+        color: isChecked ? colorScheme.secondary.withOpacity(.2) : null,
         border: Border.all(
           width: 2,
-          color: colorScheme.secondary,
+          color: isChecked ? Colors.transparent : colorScheme.secondary,
         ),
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Visibility(
+        visible: isChecked,
+        child: Icon(
+          Icons.check,
+          color: colorScheme.surface,
+        ),
       ),
     );
   }
