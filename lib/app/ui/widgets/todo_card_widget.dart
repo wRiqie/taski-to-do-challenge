@@ -41,7 +41,7 @@ class _TodoCardWidgetState extends State<TodoCardWidget> {
                 ? CrossAxisAlignment.start
                 : CrossAxisAlignment.center,
             children: [
-              const CustomCheckBoxWidget(),
+               CustomCheckBoxWidget(isChecked: widget.todo.isChecked),
               const SizedBox(
                 width: 10,
               ),
