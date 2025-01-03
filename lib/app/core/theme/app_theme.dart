@@ -4,12 +4,12 @@ part 'color_scheme.dart';
 
 final appTheme = ThemeData(
   fontFamily: 'Urbanist',
-  colorScheme: colorScheme,
+  colorScheme: _colorScheme,
   bottomNavigationBarTheme: BottomNavigationBarThemeData(
-    unselectedItemColor: colorScheme.onSurface.withOpacity(.4),
+    unselectedItemColor: _colorScheme.onSurface.withOpacity(.4),
     unselectedLabelStyle:
-        TextStyle(color: colorScheme.onSurface.withOpacity(.4)),
-    selectedItemColor: colorScheme.primary,
+        TextStyle(color: _colorScheme.onSurface.withOpacity(.4)),
+    selectedItemColor: _colorScheme.primary,
     showUnselectedLabels: true,
     showSelectedLabels: true,
     type: BottomNavigationBarType.fixed,
@@ -23,7 +23,7 @@ final appTheme = ThemeData(
       ),
       elevation: const WidgetStatePropertyAll(0),
       backgroundColor: WidgetStatePropertyAll(
-        colorScheme.primary.withOpacity(.1),
+        _colorScheme.primary.withOpacity(.1),
       ),
       textStyle: const WidgetStatePropertyAll(
         TextStyle(
@@ -32,5 +32,18 @@ final appTheme = ThemeData(
         ),
       ),
     ),
+  ),
+  textButtonTheme: const TextButtonThemeData(
+    style: ButtonStyle(
+      textStyle: WidgetStatePropertyAll(
+        TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 16,
+        ),
+      ),
+    ),
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: InputBorder.none,
   ),
 );

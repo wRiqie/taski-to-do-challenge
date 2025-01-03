@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taski_to_do_challenge/app/ui/view_models/dashboard_view_model.dart';
+import 'package:taski_to_do_challenge/app/ui/widgets/create_todo_bottom_widget.dart';
 import 'package:taski_to_do_challenge/app/ui/widgets/custom_app_bar_widget.dart';
 
 class DashboardView extends StatefulWidget {
@@ -36,7 +37,18 @@ class _DashboardViewState extends State<DashboardView> {
         unselectedFontSize: 12,
         currentIndex: viewModel.currentIndex,
         onTap: (value) {
-          viewModel.changeIndex(value);
+          if (value == 1) {
+            // create
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true,
+              builder: (context) {
+                return const CreateTodoBottomWidget();
+              },
+            );
+          } else {
+            viewModel.changeIndex(value);
+          }
         },
         items: const [
           BottomNavigationBarItem(

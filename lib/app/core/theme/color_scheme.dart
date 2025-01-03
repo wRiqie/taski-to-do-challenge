@@ -1,6 +1,6 @@
 part of 'app_theme.dart';
 
-const colorScheme = ColorScheme(
+const _colorScheme = ColorScheme(
   brightness: Brightness.light,
   primary: Color(0xFF007FFF),
   onPrimary: Color(0xFFFFFFFF),

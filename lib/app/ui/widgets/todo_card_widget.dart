@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taski_to_do_challenge/app/data/models/todo_model.dart';
+import 'package:taski_to_do_challenge/app/ui/widgets/custom_check_box_widget.dart';
 
 class TodoCardWidget extends StatefulWidget {
   final TodoModel todo;
@@ -40,16 +41,7 @@ class _TodoCardWidgetState extends State<TodoCardWidget> {
                 ? CrossAxisAlignment.start
                 : CrossAxisAlignment.center,
             children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 2,
-                    color: colorScheme.secondary,
-                  ),
-                  borderRadius: BorderRadius.circular(6),
-                ),
-              ),
+              const CustomCheckBoxWidget(),
               const SizedBox(
                 width: 10,
               ),
