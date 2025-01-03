@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taski_to_do_challenge/app/ui/views/done_view.dart';
 import 'package:taski_to_do_challenge/app/ui/views/home_view.dart';
 
 class DashboardViewModel extends ChangeNotifier {
@@ -8,7 +9,7 @@ class DashboardViewModel extends ChangeNotifier {
     const HomeView(),
     Container(),
     Container(),
-    Container(),
+    const DoneView(),
   ];
 
   void changeIndex(int index) {
